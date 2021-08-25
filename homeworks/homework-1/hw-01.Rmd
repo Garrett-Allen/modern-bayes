@@ -4,7 +4,9 @@ author: "Garrett Allen"
 date: "Due Friday August 27, 5 PM EDT"
 output: pdf_document
 ---
-
+```{r setup}
+library(tidyverse)
+```
 Today's agenda: Manipulating data objects; using the built-in functions, doing numerical calculations, and basic plots; reinforcing core probabilistic ideas.
 
 ***General instructions for homeworks***: Please follow the uploading file instructions according to the syllabus. You will give the commands to answer each question in its own code block, which will also produce plots that will be automatically embedded in the output file. Each answer must be supported by written statements as well as any code used. Your code must be completely reproducible and must compile. 
@@ -68,13 +70,33 @@ It renames the first three columns to "year", "month", and then "day", and then 
 
 g.  Create a new column called \texttt{daily}, which is the sum of the 24 hourly columns.
 ```{r create daily}
-
+subset = rain.df[,4:27]
+rain.df$daily = rowSums(subset)
 ```
 h. Give the command you would use to create a histogram of the daily rainfall amounts.  Please make sure to attach your figures in your .pdf report. 
+```{r create histogram}
+rain.df %>% 
+  ggplot(aes(x = daily)) + 
+  geom_histogram() + 
+  theme_bw()
+```
+
 i. Explain why that histogram above cannot possibly be right.
+It cannot possibly be right because there are values in the dataset that have a negative value for total rainfall. This obviously does not make sense, as rainfall for a given day should be greater than or equal to zero. 
+
 j. Give the command you would use to fix the data frame.
+```{r fix negative}
+rain.df[rain.df < 0] <- 0
+```
 k. Create a corrected histogram and again include it as part of your submitted report. Explain why it is
 more reasonable than the previous histogram.
+```{r correct histogram}
+rain.df %>% 
+  ggplot(aes(x = daily)) + 
+  geom_histogram() + 
+  theme_bw()
+```
+It is a much more reasonable histogram because it includes no negative values of rainfall, and because it has a distribution we would expect; specifically, right-skewed. This is because most days we would expect no rain, some days would have a little bit of rain, and a few days would have an incredible amount of rain over this period. 
 
 ***Data types***
 
