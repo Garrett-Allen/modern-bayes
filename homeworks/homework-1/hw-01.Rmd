@@ -1,6 +1,6 @@
 ---
 title: 'Data Wrangling in \texttt{R}'
-author: "STA 360: Homework 1"
+author: "Garrett Allen"
 date: "Due Friday August 27, 5 PM EDT"
 output: pdf_document
 ---
@@ -28,18 +28,48 @@ Reproducibility component: 10 points.
 1.  (22 points total, equally weighted) The data set **rnf6080.dat** records hourly rainfall at a certain location in Canada, every day from 1960 to 1980.
 
 a. Load the data set into R and make it a data frame called \texttt{rain.df}.  What command did you use?
+```{r read file}
+rain.df <- read.delim("data/rnf6080.dat",sep = "",header = FALSE)
+```
+I used the read.delim command to read in the .dat file, with sep = "", since this was the format of the .dat file. I additionally had to specify there was a header row with the labels for the columns.
 
 b. How many rows and columns does \texttt{rain.df} have?  How do you know?  (If there are not 5070 rows and 27 columns, you did something wrong in the first part of the problem.)
+```{r columns and rows}
+rowcol = c(nrow(rain.df),ncol(rain.df))
+rowcol
+```
+I used the commands nrow and ncol, which return the number of rows of the input dataframe and number of columns, respectively. 
 
 c. What command would you use to get the names of the columns of \texttt{rain.df}? What are those names?
+```{r names of col}
+colnames(rain.df)
+```
+The name of the ith column is V_i, where i ranges from 1 to 27. To do this, I used the function colnames(x), which returns a list of the names of the columns in the dataframe x. 
 
 d. What command would you use to get the value at row 2, column 4? What is the value?
-e. What command would you use to display the whole second row?  What is the content of that row?
-f.  What does the following command do?
+```{r getting 2,4}
+val2 = rain.df[2,4]
+val2
 ```
+You would use the command df[i,j] to retrieve the value in the ith row and jth column. df[2,4] = 0. 
+
+e. What command would you use to display the whole second row?  What is the content of that row?
+```{r getting 2}
+row2 = rain.df[2,]
+row2
+```
+You would use the command rain.df[i,] to get the contents of the ith row. THe content of rain.df[2,] is printed above. 
+
+f.  What does the following command do?
+```{r test command}
 names(rain.df) <- c("year","month","day",seq(0,23))
 ```
+It renames the first three columns to "year", "month", and then "day", and then the next 24 columns are renamed the numbers from 0 to 23. 
+
 g.  Create a new column called \texttt{daily}, which is the sum of the 24 hourly columns.
+```{r create daily}
+
+```
 h. Give the command you would use to create a histogram of the daily rainfall amounts.  Please make sure to attach your figures in your .pdf report. 
 i. Explain why that histogram above cannot possibly be right.
 j. Give the command you would use to fix the data frame.
