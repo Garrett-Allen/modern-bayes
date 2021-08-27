@@ -96,7 +96,7 @@ rain.df %>%
   geom_histogram() + 
   theme_bw()
 ```
-It is a much more reasonable histogram because it includes no negative values of rainfall, and because it has a distribution we would expect; specifically, right-skewed. This is because most days we would expect no rain, some days would have a little bit of rain, and a few days would have an incredible amount of rain over this period. 
+It is a much more reasonable histogram because it includes no negative values of rainfall, and because it has a distribution we would expect; specifically, right-skewed. This is because most days we would expect no rain, some days would have a little bit of rain, and a few days would have an incredible amount of rain over this period. We could have instead replaced daily values with the mean value of the prior histogram (without the negatives) but I decided to put zero instead given the large skew, as I wanted to ensure the shape of the distribution remained roughly similar instead of overemphasizing the mean. 
 
 ***Data types***
 
