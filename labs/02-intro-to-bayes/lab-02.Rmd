@@ -55,7 +55,7 @@ The likelihood function is given below. Since this is a probability and is only 
 
 You have a rough sketch of what you should do for this part of the assignment. Try this out in lab on your own. 
 
-```{r, echo = TRUE}
+```{r, betabernoulli generation, echo = TRUE}
 ### Bernoulli LH Function ###
 # Input: obs.data, theta
 # Output: bernoulli likelihood
@@ -89,9 +89,50 @@ df %>%
 # Task 4 (To be completed for homework)
 
 Write a function that takes as its inputs  prior parameters \textsf{a} and \textsf{b} for the Beta-Bernoulli model and the observed data, and produces the posterior parameters you need for the model. \textbf{Generate and print} the posterior parameters for a non-informative prior i.e. \textsf{(a,b) = (1,1)} and for an informative case \textsf{(a,b) = (3,1)}}.
+```{r, posteriorGenerate}
+posteriorGenerate <- function(a,b, obs.data) { 
+  n <- length(obs.data)
+  x <- sum(obs.data)
+  a.post <- x + a
+  b.post <- n - x + b
+  return(c(a.post,b.post))
+}
 
-
-
+noninform_param <- posteriorGenerate(1,1,obs.data)
+inform_param <- posteriorGenerate(3,1,obs.data)
+```
 # Task 5 (To be completed for homework)
 
 Create two plots, one for the informative and one for the non-informative case to show the posterior distribution and superimpose the prior distributions on each along with the likelihood. What do you see? Remember to turn the y-axis ticks off since superimposing may make the scale non-sense.
+
+```{r non-informative}
+noninform_prior <- dbeta(theta, 1, 1)
+like <- BernoulliLhFunction(obs.data, theta)
+non_informposterior <- dbeta(theta, noninform_param[1],noninform_param[2])
+
+plot(theta, noninform_prior,type = "l", ylab = "Density",
+     lty = 3, lwd = 3, xlab = expression(theta))
+par(new = TRUE)
+plot(theta, like, type = "l",
+     lty = 3, lwd = 3, axes = FALSE, col = "blue", 
+     xlab = "", ylab = "") 
+par(new = TRUE)
+plot(theta, noninform_posterior, type = "l", xlab = "", ylab = "",
+     lty = 3, lwd = 3, axes = FALSE, col = "green")
+```
+
+```{r informdf}
+inform_prior <- dbeta(theta,3,1)
+inform_posterior <- dbeta(theta, inform_param[1], inform_param[2])
+
+plot(theta, inform_prior,type = "l", ylab = "Density",
+     lty = 3, lwd = 3, xlab = expression(theta))
+par(new = TRUE)
+plot(theta, like, type = "l",
+     lty = 3, lwd = 3, axes = FALSE, col = "blue", 
+     xlab = "", ylab = "") 
+par(new = TRUE)
+plot(theta, inform_posterior, type = "l", xlab = "", ylab = "",
+     lty = 3, lwd = 3, axes = FALSE, col = "green")
+
+```
