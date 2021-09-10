@@ -12,11 +12,10 @@ font-size: 8px
 Announcements
 ===
 
-- Exam I is on Thursday, September 24
-- Tuesday September 22 we will review
+- Exam I is on Thursday, September 30
+- Tuesday September 28 we will review
 - Material will cover modules 1 -- 4.
-- There will be no lab on September 25th
-- Olivier and Michael will hold extra review sessions (the week of the exam) in place of lab that will be announced soon
+- There will be no lab on October 1.
 - Who cannot make any OH due to a class conflict? 
 
 
@@ -360,5 +359,9 @@ Detailed Takeaways
 - The case study for this problem (on IQ scores) is a good review problem regarding when you should use the normal-normal-gamma model over the normal-normal model. This is something that you should be able to conceptually walk through for this case study or a similar case study. 
 
 
+Module 4 Notes
+===
 
+Module 4 Class Notes can be found here:
 
+https://github.com/resteorts/modern-bayes/tree/master/lecturesModernBayes20/lecture-4/04-class-notes

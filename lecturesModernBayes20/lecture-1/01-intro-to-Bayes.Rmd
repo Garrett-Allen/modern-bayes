@@ -422,15 +422,22 @@ Let's derive the posterior preditive distribution.
 Posterior predictive distribution
 ===
 - We may wish to predict a new data point $x_{n+1}$
-- We assume that $x_{1:(n+1)}$ are independent given $\theta$
+- \textcolor{red}{Assumption 1}: Assume that $x_{1:(n+1)}$ are independent given $\theta$
 
 $$
 \begin{aligned}
 p(x_{n+1}|x_{1:n}) &= \int p(x_{n+1},\theta|x_{1:n})\,d\theta\\
-&= \int p(x_{n+1}|\theta,x_{1:n}) p(\theta|x_{1:n})\,d\theta\\
-& = \int p(x_{n+1}|\theta) p(\theta|x_{1:n})\,d\theta.
+& \int \frac{p(x_{n+1},\theta, x_{1:n})}{p(x_{1:n})}\,d\theta \quad (\text{Conditional probability})\\
+& \int \frac{p(x_{n+1}|\theta,x_{1:n})p(\theta|x_{1:n})p(x_{1:n})}{p(x_{1:n})}\,d\theta \quad (\text{Product rule})\\
+&= \int p(x_{n+1}|\theta,x_{1:n}) p(\theta|x_{1:n})\,d\theta \\
+& = \int p(x_{n+1}|\theta) p(\theta|x_{1:n})\,d\theta \quad \text{By Assumption 1.}
 \end{aligned}
 $$
+
+
+
+
+
 
 
 
@@ -439,8 +446,10 @@ Posterior predictive distribution
 The posterior predictive can be derived to be
 $$
 \begin{aligned}
-\Pr(X_{n+1} = 1\mid x_{1:n}) & = \int \Pr(X_{n+1} = 1\mid \theta) p(\theta|x_{1:n}) d\theta\\
-& =\int \theta\,\Beta(\theta|a_n,b_n) =\frac{a_n}{a_n + b_n}.
+\Pr(X_{n+1} = 1\mid x_{1:n}) 
+&= \int \Pr(X_{n+1} = 1\mid \theta) p(\theta|x_{1:n}) d\theta\\
+& =\int \theta\,\Beta(\theta|a_n,b_n) d\theta \\
+& =\frac{a_n}{a_n + b_n}  \quad (\text{Mean of Beta distribution}).
 \end{aligned}
 $$
 
@@ -542,4 +551,13 @@ p(\theta|x_{1:n}) &\propto p(x_{1:n}|\theta) p(\theta) \\
 \end{align*}
 Therefore, since the posterior density must integrate to $1$, we have
 $$p(\theta|x_{1:n}) =\Ga\big(\theta\mid a+\textstyle\sum x_i,\,b+n\big).$$
+
+Module 1 Derivations
+===
+
+Class notes from Module 1 can be found below:
+
+https://github.com/resteorts/modern-bayes/tree/master/lecturesModernBayes20/lecture-1/01-class-notes
+
+
 
